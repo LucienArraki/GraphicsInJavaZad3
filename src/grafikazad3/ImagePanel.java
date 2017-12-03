@@ -27,6 +27,7 @@ public class ImagePanel extends javax.swing.JPanel {
     private Image backgroundImage;
     ArrayList<Polygon> polygon = new ArrayList<Polygon>();
     ArrayList<Point> point = new ArrayList<Point>();
+    private Point startPolygon = new Point(0,0);
     /**
      * Creates new form ImagePanel
      */
@@ -46,9 +47,7 @@ public class ImagePanel extends javax.swing.JPanel {
         for(Polygon p: polygon){
             g2d.drawPolygon(p);
         }
-        if(point.size()<2)
-            g2d.drawLine((int)point.get(0).getX(), (int)point.get(0).getY(), 
-                    (int)point.get(0).getX(), (int)point.get(0).getY()+1);
+        g2d.drawOval((int)startPolygon.getX(), (int)startPolygon.getY(), 2, 2);
     }
     
     public void setImage(BufferedImage img){
@@ -98,6 +97,7 @@ public class ImagePanel extends javax.swing.JPanel {
                 polygon.add(poly);
                 System.out.print(polygon.size() + " dlogosc polygon");
                 point.clear();
+                startPolygon = new Point(0,0);
                 this.repaint();
             }
             else{
@@ -108,6 +108,8 @@ public class ImagePanel extends javax.swing.JPanel {
         else{
             point.add(new Point(evt.getX(), evt.getY()));
             System.out.print(point.size() + " dlogosc poin");
+            if(point.size()<2)
+                startPolygon = new Point(evt.getX(), evt.getY());
             this.repaint();
         }
     }//GEN-LAST:event_formMouseClicked
