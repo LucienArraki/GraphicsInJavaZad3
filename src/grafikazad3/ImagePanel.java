@@ -9,8 +9,10 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
+import java.awt.Point;
 import java.awt.Polygon;
 import java.awt.Rectangle;
+import java.awt.Shape;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.util.ArrayList;
@@ -24,6 +26,7 @@ public class ImagePanel extends javax.swing.JPanel {
     protected BufferedImage image;
     private Image backgroundImage;
     ArrayList<Polygon> polygon = new ArrayList<Polygon>();
+    ArrayList<Point> point = new ArrayList<Point>();
     /**
      * Creates new form ImagePanel
      */
@@ -40,6 +43,12 @@ public class ImagePanel extends javax.swing.JPanel {
     public void paintComponent(Graphics g) {    //Wstawienie obrazu i figur
         Graphics2D g2d = (Graphics2D) g;
         g2d.drawImage(image, 0, 0, this);
+        for(Polygon p: polygon){
+            g2d.drawPolygon(p);
+        }
+        if(point.size()<2)
+            g2d.drawLine((int)point.get(0).getX(), (int)point.get(0).getY(), 
+                    (int)point.get(0).getX(), (int)point.get(0).getY()+1);
     }
     
     public void setImage(BufferedImage img){
@@ -76,7 +85,31 @@ public class ImagePanel extends javax.swing.JPanel {
 
     private void formMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseClicked
         // TODO add your handling code here:
-        
+        if(point.size()>1){
+            if((int)Math.sqrt(Math.pow(evt.getX()-point.get(point.size()-1).getX(),2) +
+                    Math.pow(evt.getY()-point.get(point.size()-1).getY(),2))< 10){
+                int xpoints[] = new int[point.size()];
+                int ypoints[] = new int[point.size()];
+                for(int i = 0; i < point.size(); i++){
+                    xpoints[i] = (int)point.get(i).getX();
+                    ypoints[i] = (int)point.get(i).getY();
+                }
+                Polygon poly = new Polygon(xpoints, ypoints,point.size());
+                polygon.add(poly);
+                System.out.print(polygon.size() + " dlogosc polygon");
+                point.clear();
+                this.repaint();
+            }
+            else{
+                point.add(new Point(evt.getX(), evt.getY()));
+                System.out.print(point.size() + " dlogosc poin");
+            }
+        }
+        else{
+            point.add(new Point(evt.getX(), evt.getY()));
+            System.out.print(point.size() + " dlogosc poin");
+            this.repaint();
+        }
     }//GEN-LAST:event_formMouseClicked
 
 
