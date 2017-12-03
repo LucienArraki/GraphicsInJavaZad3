@@ -5,9 +5,16 @@
  */
 package grafikazad3;
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.Image;
+import java.awt.Polygon;
+import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
+import java.io.File;
+import java.util.ArrayList;
+import javax.imageio.ImageIO;
 
 /**
  *
@@ -15,11 +22,18 @@ import java.awt.image.BufferedImage;
  */
 public class ImagePanel extends javax.swing.JPanel {
     protected BufferedImage image;
+    private Image backgroundImage;
+    ArrayList<Polygon> polygon = new ArrayList<Polygon>();
     /**
      * Creates new form ImagePanel
      */
     public ImagePanel() {
         initComponents();
+        try{
+            backgroundImage = ImageIO.read(new File("back.jpg"));
+        }catch(Exception e){
+            e.printStackTrace();
+        }
     }
     
     @Override
@@ -32,8 +46,6 @@ public class ImagePanel extends javax.swing.JPanel {
         this.image=img;
         this.repaint();
     }
-    
-    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -44,6 +56,11 @@ public class ImagePanel extends javax.swing.JPanel {
     private void initComponents() {
 
         setBackground(new java.awt.Color(102, 255, 51));
+        addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                formMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -56,6 +73,12 @@ public class ImagePanel extends javax.swing.JPanel {
             .addGap(0, 300, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void formMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseClicked
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_formMouseClicked
+
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

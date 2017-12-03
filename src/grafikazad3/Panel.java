@@ -8,6 +8,7 @@ package grafikazad3;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.Scanner;
 import javax.imageio.ImageIO;
 import javax.swing.JOptionPane;
 
@@ -34,7 +35,6 @@ public class Panel extends javax.swing.JFrame {
     private void initComponents() {
 
         Open = new javax.swing.JButton();
-        Save = new javax.swing.JButton();
         Paint = new javax.swing.JButton();
         Matrix = new javax.swing.JButton();
         Show = new javax.swing.JButton();
@@ -68,16 +68,6 @@ public class Panel extends javax.swing.JFrame {
         Open.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 OpenActionPerformed(evt);
-            }
-        });
-
-        Save.setText("Zapisz");
-        Save.setMaximumSize(new java.awt.Dimension(150, 23));
-        Save.setMinimumSize(new java.awt.Dimension(150, 23));
-        Save.setPreferredSize(new java.awt.Dimension(150, 23));
-        Save.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                SaveActionPerformed(evt);
             }
         });
 
@@ -152,7 +142,7 @@ public class Panel extends javax.swing.JFrame {
         );
         imagePanel1Layout.setVerticalGroup(
             imagePanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGap(0, 549, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -164,9 +154,7 @@ public class Panel extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(Open, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(Save, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
+                        .addGap(186, 186, 186)
                         .addComponent(Matrix, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(Paint, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -209,7 +197,6 @@ public class Panel extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Open, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Save, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(Paint, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(Matrix, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(Show))
@@ -267,16 +254,29 @@ public class Panel extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_OpenActionPerformed
 
-    private void SaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SaveActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_SaveActionPerformed
-
     private void MatrixActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MatrixActionPerformed
         // TODO add your handling code here:
+        String transformationFile = JOptionPane.showInputDialog("wpisz nazwe obrazka");
+        
+        try {
+            Scanner scanner = new Scanner(new File(transformationFile));
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.out.println(e);
+        }
     }//GEN-LAST:event_MatrixActionPerformed
 
     private void PaintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PaintActionPerformed
         // TODO add your handling code here:
+        img = null;
+        try {
+            img = ImageIO.read(new File("back.jpg"));
+            imagePanel1.setImage(img);
+            
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.out.println(e);
+        }
     }//GEN-LAST:event_PaintActionPerformed
 
     private void ShowActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ShowActionPerformed
@@ -333,7 +333,6 @@ public class Panel extends javax.swing.JFrame {
     private javax.swing.JButton Matrix;
     private javax.swing.JButton Open;
     private javax.swing.JButton Paint;
-    private javax.swing.JButton Save;
     private javax.swing.JButton Scale;
     private javax.swing.JTextField ScaleX;
     private javax.swing.JTextField ScaleY;
@@ -350,6 +349,6 @@ public class Panel extends javax.swing.JFrame {
     private javax.swing.JButton Turn;
     private javax.swing.JTextField TurnX;
     private javax.swing.JTextField TurnY;
-    private grafikazad3.ImagePanel imagePanel1;
+    protected grafikazad3.ImagePanel imagePanel1;
     // End of variables declaration//GEN-END:variables
 }
