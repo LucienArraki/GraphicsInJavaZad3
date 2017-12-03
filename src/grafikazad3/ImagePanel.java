@@ -54,6 +54,68 @@ public class ImagePanel extends javax.swing.JPanel {
         this.image=img;
         this.repaint();
     }
+    
+    public void turnPolygon(int x){
+        if(polygon.size()>0){
+            ArrayList<Polygon> initP = new ArrayList<Polygon>();
+            for(Polygon p:polygon){
+                int xpoints[] = new int[p.xpoints.length];
+                int ypoints[] = new int[p.ypoints.length];
+                for(int i = 0; i < p.xpoints.length; i++){
+                    xpoints[i] =(int)( (double)p.xpoints[i]*Math.cos(x*Math.PI/180) -
+                            (double)p.ypoints[i]*Math.sin(x*Math.PI/180));
+                    ypoints[i] =(int)( (double)p.xpoints[i]*Math.sin(x*Math.PI/180) +
+                            (double)p.ypoints[i]*Math.cos(x*Math.PI/180));
+                }
+                Polygon poly = new Polygon(xpoints, ypoints,p.xpoints.length);
+                initP.add(poly);
+            }
+        polygon = initP;
+        }
+        this.repaint();
+    }
+    
+    public void scalePolygon(int x,int y){
+        if(polygon.size()>0){
+            ArrayList<Polygon> initP = new ArrayList<Polygon>();
+            for(Polygon p:polygon){
+                int xpoints[] = new int[p.xpoints.length];
+                int ypoints[] = new int[p.ypoints.length];
+                for(int i = 0; i < p.xpoints.length; i++){
+                    if(x >= 0)
+                        xpoints[i] = p.xpoints[i]*x;
+                    else
+                        xpoints[i] = p.xpoints[i]/Math.abs(x);
+                    if(y >= 0)
+                        ypoints[i] = p.ypoints[i]*y;
+                    else
+                        ypoints[i] = p.ypoints[i]/Math.abs(y);
+                }
+                Polygon poly = new Polygon(xpoints, ypoints,p.xpoints.length);
+                initP.add(poly);
+            }
+        polygon = initP;
+        }
+        this.repaint();
+    }
+        
+    public void slidePolygon(int x,int y){
+        if(polygon.size()>0){
+            ArrayList<Polygon> initP = new ArrayList<Polygon>();
+            for(Polygon p:polygon){
+                int xpoints[] = new int[p.xpoints.length];
+                int ypoints[] = new int[p.ypoints.length];
+                for(int i = 0; i < p.xpoints.length; i++){
+                    xpoints[i] = p.xpoints[i]+x;
+                    ypoints[i] = p.ypoints[i]+y;
+                }
+                Polygon poly = new Polygon(xpoints, ypoints,p.xpoints.length);
+                initP.add(poly);
+            }
+        polygon = initP;
+        }
+        this.repaint();
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -95,26 +157,21 @@ public class ImagePanel extends javax.swing.JPanel {
                 }
                 Polygon poly = new Polygon(xpoints, ypoints,point.size());
                 polygon.add(poly);
-                System.out.print(polygon.size() + " dlogosc polygon");
                 point.clear();
                 startPolygon = new Point(0,0);
                 this.repaint();
             }
             else{
                 point.add(new Point(evt.getX(), evt.getY()));
-                System.out.print(point.size() + " dlogosc poin");
             }
         }
         else{
             point.add(new Point(evt.getX(), evt.getY()));
-            System.out.print(point.size() + " dlogosc poin");
             if(point.size()<2)
                 startPolygon = new Point(evt.getX(), evt.getY());
             this.repaint();
         }
     }//GEN-LAST:event_formMouseClicked
-
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     // End of variables declaration//GEN-END:variables

@@ -44,15 +44,14 @@ public class Panel extends javax.swing.JFrame {
         TextYScale = new javax.swing.JTextField();
         ScaleY = new javax.swing.JTextField();
         TextXTurn = new javax.swing.JTextField();
-        TextYTurn = new javax.swing.JTextField();
-        TurnX = new javax.swing.JTextField();
-        TurnY = new javax.swing.JTextField();
+        TurnDegrees = new javax.swing.JTextField();
         Slide = new javax.swing.JButton();
         TextXSlide = new javax.swing.JTextField();
         TextYSlide = new javax.swing.JTextField();
         SlideX = new javax.swing.JTextField();
         SlideY = new javax.swing.JTextField();
         imagePanel1 = new grafikazad3.ImagePanel();
+        SaveImage = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("BasePanel");
@@ -103,25 +102,33 @@ public class Panel extends javax.swing.JFrame {
             }
         });
 
+        TextXScale.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         TextXScale.setText("Podaj x");
         TextXScale.setEnabled(false);
 
+        TextYScale.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         TextYScale.setText("Podaj y");
         TextYScale.setEnabled(false);
 
         ScaleY.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
 
-        TextXTurn.setText("Punkt x");
+        TextXTurn.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        TextXTurn.setText("Stopnie");
+        TextXTurn.setToolTipText("");
         TextXTurn.setEnabled(false);
 
-        TextYTurn.setText("Punkt y");
-        TextYTurn.setEnabled(false);
-
         Slide.setText("Przesuń");
+        Slide.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SlideActionPerformed(evt);
+            }
+        });
 
+        TextXSlide.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         TextXSlide.setText("Punkt x");
         TextXSlide.setEnabled(false);
 
+        TextYSlide.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         TextYSlide.setText("Punkt y");
         TextYSlide.setEnabled(false);
 
@@ -136,6 +143,13 @@ public class Panel extends javax.swing.JFrame {
             .addGap(0, 549, Short.MAX_VALUE)
         );
 
+        SaveImage.setText("Zapisz");
+        SaveImage.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SaveImageActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -148,7 +162,10 @@ public class Panel extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(Matrix, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(Paint, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(Paint, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(SaveImage)
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(imagePanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -156,30 +173,26 @@ public class Panel extends javax.swing.JFrame {
                             .addComponent(Scale, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(Turn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(TextXScale)
-                                    .addComponent(TextYScale, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(TextXScale, javax.swing.GroupLayout.DEFAULT_SIZE, 54, Short.MAX_VALUE)
+                                    .addComponent(TextYScale))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(ScaleX)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(ScaleX, javax.swing.GroupLayout.DEFAULT_SIZE, 60, Short.MAX_VALUE)
                                     .addComponent(ScaleY)))
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(TextXTurn)
-                                    .addComponent(TextYTurn, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(TextXTurn, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(TurnX)
-                                    .addComponent(TurnY)))
-                            .addComponent(Slide, javax.swing.GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE)
+                                .addComponent(TurnDegrees, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(Slide, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(TextXSlide)
-                                    .addComponent(TextYSlide, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(TextXSlide, javax.swing.GroupLayout.DEFAULT_SIZE, 54, Short.MAX_VALUE)
+                                    .addComponent(TextYSlide))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(SlideX)
-                                    .addComponent(SlideY))))))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(SlideY)
+                                    .addComponent(SlideX, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))))))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -189,7 +202,8 @@ public class Panel extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Open, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(Paint, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Matrix, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(Matrix, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(SaveImage))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(imagePanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -209,12 +223,8 @@ public class Panel extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(TextXTurn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(TurnX, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(TextYTurn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(TurnY, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(54, 54, 54)
+                            .addComponent(TurnDegrees, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(92, 92, 92)
                         .addComponent(Slide)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -273,11 +283,22 @@ public class Panel extends javax.swing.JFrame {
 
     private void ScaleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ScaleActionPerformed
         // TODO add your handling code here:
+        imagePanel1.scalePolygon(Integer.parseInt(ScaleX.getText()), Integer.parseInt(ScaleY.getText()));
     }//GEN-LAST:event_ScaleActionPerformed
 
     private void TurnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TurnActionPerformed
         // TODO add your handling code here:
+        imagePanel1.turnPolygon(Integer.parseInt(TurnDegrees.getText()));
     }//GEN-LAST:event_TurnActionPerformed
+
+    private void SaveImageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SaveImageActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_SaveImageActionPerformed
+
+    private void SlideActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SlideActionPerformed
+        // TODO add your handling code here:
+        imagePanel1.slidePolygon(Integer.parseInt(SlideX.getText()), Integer.parseInt(SlideY.getText()));
+    }//GEN-LAST:event_SlideActionPerformed
 
     /**
      * @param args the command line arguments
@@ -321,6 +342,7 @@ public class Panel extends javax.swing.JFrame {
     private javax.swing.JButton Matrix;
     private javax.swing.JButton Open;
     private javax.swing.JButton Paint;
+    private javax.swing.JButton SaveImage;
     private javax.swing.JButton Scale;
     private javax.swing.JTextField ScaleX;
     private javax.swing.JTextField ScaleY;
@@ -332,10 +354,8 @@ public class Panel extends javax.swing.JFrame {
     private javax.swing.JTextField TextXTurn;
     private javax.swing.JTextField TextYScale;
     private javax.swing.JTextField TextYSlide;
-    private javax.swing.JTextField TextYTurn;
     private javax.swing.JButton Turn;
-    private javax.swing.JTextField TurnX;
-    private javax.swing.JTextField TurnY;
+    private javax.swing.JTextField TurnDegrees;
     protected grafikazad3.ImagePanel imagePanel1;
     // End of variables declaration//GEN-END:variables
 }
