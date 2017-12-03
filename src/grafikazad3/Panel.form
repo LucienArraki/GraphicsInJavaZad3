@@ -39,6 +39,8 @@
                       <Component id="Paint" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="SaveImage" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Component id="SaveText" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                   </Group>
                   <Group type="102" attributes="0">
@@ -47,22 +49,6 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="Scale" max="32767" attributes="0"/>
                           <Component id="Turn" alignment="0" max="32767" attributes="0"/>
-                          <Group type="102" alignment="0" attributes="0">
-                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Component id="TextXScale" pref="54" max="32767" attributes="0"/>
-                                  <Component id="TextYScale" max="32767" attributes="0"/>
-                              </Group>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Component id="ScaleX" pref="60" max="32767" attributes="0"/>
-                                  <Component id="ScaleY" max="32767" attributes="0"/>
-                              </Group>
-                          </Group>
-                          <Group type="102" alignment="0" attributes="0">
-                              <Component id="TextXTurn" min="-2" pref="54" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="TurnDegrees" min="-2" pref="60" max="-2" attributes="0"/>
-                          </Group>
                           <Component id="Slide" alignment="0" max="32767" attributes="0"/>
                           <Group type="102" alignment="0" attributes="0">
                               <Group type="103" groupAlignment="0" max="-2" attributes="0">
@@ -74,6 +60,28 @@
                                   <Component id="SlideY" max="32767" attributes="0"/>
                                   <Component id="SlideX" min="-2" pref="60" max="-2" attributes="0"/>
                               </Group>
+                          </Group>
+                          <Group type="102" attributes="0">
+                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                          <Component id="TextXScale" pref="54" max="32767" attributes="0"/>
+                                          <Component id="TextYScale" max="32767" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                          <Component id="ScaleX" pref="60" max="32767" attributes="0"/>
+                                          <Component id="ScaleY" max="32767" attributes="0"/>
+                                      </Group>
+                                  </Group>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Component id="TextXTurn" pref="54" max="32767" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="TurnDegrees" min="-2" pref="60" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Component id="turnPoint" max="32767" attributes="0"/>
+                              </Group>
+                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
@@ -91,6 +99,7 @@
                   <Component id="Paint" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="Matrix" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="SaveImage" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="SaveText" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
@@ -115,7 +124,9 @@
                           <Component id="TextXTurn" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="TurnDegrees" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace min="-2" pref="92" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="turnPoint" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="63" max="-2" attributes="0"/>
                       <Component id="Slide" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
@@ -217,9 +228,6 @@
     </Component>
     <Component class="javax.swing.JTextField" name="TextYScale">
       <Properties>
-        <Property name="document" type="javax.swing.text.Document" editor="org.netbeans.modules.form.ComponentChooserEditor">
-          <ComponentRef name="default"/>
-        </Property>
         <Property name="horizontalAlignment" type="int" value="0"/>
         <Property name="text" type="java.lang.String" value="Podaj y"/>
         <Property name="enabled" type="boolean" value="false"/>
@@ -234,9 +242,6 @@
     </Component>
     <Component class="javax.swing.JTextField" name="TextXTurn">
       <Properties>
-        <Property name="document" type="javax.swing.text.Document" editor="org.netbeans.modules.form.ComponentChooserEditor">
-          <ComponentRef name="default"/>
-        </Property>
         <Property name="horizontalAlignment" type="int" value="0"/>
         <Property name="text" type="java.lang.String" value="Stopnie"/>
         <Property name="toolTipText" type="java.lang.String" value=""/>
@@ -255,9 +260,6 @@
     </Component>
     <Component class="javax.swing.JTextField" name="TextXSlide">
       <Properties>
-        <Property name="document" type="javax.swing.text.Document" editor="org.netbeans.modules.form.ComponentChooserEditor">
-          <ComponentRef name="default"/>
-        </Property>
         <Property name="horizontalAlignment" type="int" value="0"/>
         <Property name="text" type="java.lang.String" value="Punkt x"/>
         <Property name="enabled" type="boolean" value="false"/>
@@ -265,9 +267,6 @@
     </Component>
     <Component class="javax.swing.JTextField" name="TextYSlide">
       <Properties>
-        <Property name="document" type="javax.swing.text.Document" editor="org.netbeans.modules.form.ComponentChooserEditor">
-          <ComponentRef name="default"/>
-        </Property>
         <Property name="horizontalAlignment" type="int" value="0"/>
         <Property name="text" type="java.lang.String" value="Punkt y"/>
         <Property name="enabled" type="boolean" value="false"/>
@@ -278,6 +277,9 @@
     <Component class="javax.swing.JTextField" name="SlideY">
     </Component>
     <Container class="grafikazad3.ImagePanel" name="imagePanel1">
+      <Events>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="imagePanel1MouseClicked"/>
+      </Events>
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="4"/>
       </AuxValues>
@@ -298,9 +300,26 @@
     <Component class="javax.swing.JButton" name="SaveImage">
       <Properties>
         <Property name="text" type="java.lang.String" value="Zapisz"/>
+        <Property name="toolTipText" type="java.lang.String" value=""/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="SaveImageActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="SaveText">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Zapisz plik text"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="SaveTextActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="turnPoint">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Punkt"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="turnPointActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>

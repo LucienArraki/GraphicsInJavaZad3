@@ -15,6 +15,7 @@ import java.awt.Rectangle;
 import java.awt.Shape;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import javax.imageio.ImageIO;
 
@@ -24,20 +25,15 @@ import javax.imageio.ImageIO;
  */
 public class ImagePanel extends javax.swing.JPanel {
     protected BufferedImage image;
-    private Image backgroundImage;
     ArrayList<Polygon> polygon = new ArrayList<Polygon>();
     ArrayList<Point> point = new ArrayList<Point>();
     private Point startPolygon = new Point(0,0);
+    public Point turnPolygon = new Point(0,0);
     /**
      * Creates new form ImagePanel
      */
     public ImagePanel() {
         initComponents();
-        try{
-            backgroundImage = ImageIO.read(new File("back.jpg"));
-        }catch(Exception e){
-            e.printStackTrace();
-        }
     }
     
     @Override
@@ -48,6 +44,7 @@ public class ImagePanel extends javax.swing.JPanel {
             g2d.drawPolygon(p);
         }
         g2d.drawOval((int)startPolygon.getX(), (int)startPolygon.getY(), 2, 2);
+        g2d.drawOval((int)turnPolygon.getX(), (int)turnPolygon.getY(), 3, 3);
     }
     
     public void setImage(BufferedImage img){
@@ -57,6 +54,7 @@ public class ImagePanel extends javax.swing.JPanel {
     
     public void turnPolygon(int x){
         if(polygon.size()>0){
+            slidePolygon(-(int)turnPolygon.getX(),-(int)turnPolygon.getY());
             ArrayList<Polygon> initP = new ArrayList<Polygon>();
             for(Polygon p:polygon){
                 int xpoints[] = new int[p.xpoints.length];
@@ -71,12 +69,14 @@ public class ImagePanel extends javax.swing.JPanel {
                 initP.add(poly);
             }
         polygon = initP;
+        slidePolygon((int)turnPolygon.getX(),(int)turnPolygon.getY());
         }
         this.repaint();
     }
     
     public void scalePolygon(int x,int y){
         if(polygon.size()>0){
+            slidePolygon(-(int)turnPolygon.getX(),-(int)turnPolygon.getY());
             ArrayList<Polygon> initP = new ArrayList<Polygon>();
             for(Polygon p:polygon){
                 int xpoints[] = new int[p.xpoints.length];
@@ -95,6 +95,7 @@ public class ImagePanel extends javax.swing.JPanel {
                 initP.add(poly);
             }
         polygon = initP;
+        slidePolygon((int)turnPolygon.getX(),(int)turnPolygon.getY());
         }
         this.repaint();
     }
@@ -116,6 +117,37 @@ public class ImagePanel extends javax.swing.JPanel {
         }
         this.repaint();
     }
+    
+    public String saveText(){
+        String out = "";
+        int k = 0;
+        for(Polygon p:polygon){
+            out+="P"+k;
+            out+=" x: ";
+            for(int i = 0; i < p.xpoints.length; i++){
+                out += p.xpoints[i] + " ";
+            }
+            out+="y: ";
+            for(int i = 0; i < p.ypoints.length; i++){
+                out += p.ypoints[i] + " ";
+            }
+            out+="\n";
+            k++;
+        }
+        return out;
+    }
+        
+    protected void takePicture() {
+    BufferedImage img = new BufferedImage(this.getWidth(), this.getHeight(), BufferedImage.TYPE_INT_RGB);
+    this.print(img.getGraphics()); // or: panel.printAll(...);
+    try {
+        ImageIO.write(img, "jpg", new File("panel.jpg"));
+    }
+    catch (IOException e) {
+        // TODO Auto-generated catch block
+        e.printStackTrace();
+    }
+}
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -129,6 +161,12 @@ public class ImagePanel extends javax.swing.JPanel {
         addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 formMouseClicked(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                formMousePressed(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                formMouseReleased(evt);
             }
         });
 
@@ -172,6 +210,16 @@ public class ImagePanel extends javax.swing.JPanel {
             this.repaint();
         }
     }//GEN-LAST:event_formMouseClicked
+
+    private void formMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMousePressed
+        // TODO add your handling code here:
+        turnPolygon.setLocation(evt.getX(), evt.getY());
+        this.repaint();
+    }//GEN-LAST:event_formMousePressed
+
+    private void formMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseReleased
+        // TODO add your handling code here:
+    }//GEN-LAST:event_formMouseReleased
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     // End of variables declaration//GEN-END:variables
