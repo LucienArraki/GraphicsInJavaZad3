@@ -79,7 +79,6 @@
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Component id="TurnDegrees" min="-2" pref="60" max="-2" attributes="0"/>
                                   </Group>
-                                  <Component id="turnPoint" max="32767" attributes="0"/>
                               </Group>
                               <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                           </Group>
@@ -124,9 +123,7 @@
                           <Component id="TextXTurn" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="TurnDegrees" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="turnPoint" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="63" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="92" max="-2" attributes="0"/>
                       <Component id="Slide" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
@@ -151,10 +148,10 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Wczytaj"/>
         <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-          <Dimension value="[150, 23]"/>
+          <Dimension value="[200, 23]"/>
         </Property>
         <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-          <Dimension value="[150, 23]"/>
+          <Dimension value="[0, 23]"/>
         </Property>
         <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
           <Dimension value="[150, 23]"/>
@@ -168,10 +165,10 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Rysuj"/>
         <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-          <Dimension value="[150, 23]"/>
+          <Dimension value="[200, 23]"/>
         </Property>
         <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-          <Dimension value="[150, 23]"/>
+          <Dimension value="[0, 23]"/>
         </Property>
         <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
           <Dimension value="[150, 23]"/>
@@ -185,10 +182,10 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Macierz transformacji"/>
         <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-          <Dimension value="[150, 23]"/>
+          <Dimension value="[200, 23]"/>
         </Property>
         <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-          <Dimension value="[150, 23]"/>
+          <Dimension value="[0, 23]"/>
         </Property>
         <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
           <Dimension value="[150, 23]"/>
@@ -201,6 +198,12 @@
     <Component class="javax.swing.JButton" name="Scale">
       <Properties>
         <Property name="text" type="java.lang.String" value="Skaluj"/>
+        <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+          <Dimension value="[200, 23]"/>
+        </Property>
+        <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+          <Dimension value="[0, 23]"/>
+        </Property>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ScaleActionPerformed"/>
@@ -209,6 +212,12 @@
     <Component class="javax.swing.JButton" name="Turn">
       <Properties>
         <Property name="text" type="java.lang.String" value="Obr&#xf3;&#x107;"/>
+        <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+          <Dimension value="[200, 23]"/>
+        </Property>
+        <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+          <Dimension value="[0, 23]"/>
+        </Property>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="TurnActionPerformed"/>
@@ -253,6 +262,12 @@
     <Component class="javax.swing.JButton" name="Slide">
       <Properties>
         <Property name="text" type="java.lang.String" value="Przesu&#x144;"/>
+        <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+          <Dimension value="[200, 23]"/>
+        </Property>
+        <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+          <Dimension value="[0, 23]"/>
+        </Property>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="SlideActionPerformed"/>
@@ -301,6 +316,12 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Zapisz"/>
         <Property name="toolTipText" type="java.lang.String" value=""/>
+        <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+          <Dimension value="[200, 23]"/>
+        </Property>
+        <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+          <Dimension value="[0, 23]"/>
+        </Property>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="SaveImageActionPerformed"/>
@@ -309,17 +330,15 @@
     <Component class="javax.swing.JButton" name="SaveText">
       <Properties>
         <Property name="text" type="java.lang.String" value="Zapisz plik text"/>
+        <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+          <Dimension value="[200, 23]"/>
+        </Property>
+        <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+          <Dimension value="[0, 23]"/>
+        </Property>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="SaveTextActionPerformed"/>
-      </Events>
-    </Component>
-    <Component class="javax.swing.JButton" name="turnPoint">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Punkt"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="turnPointActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>

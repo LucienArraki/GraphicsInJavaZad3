@@ -118,18 +118,16 @@ public class ImagePanel extends javax.swing.JPanel {
         this.repaint();
     }
     
-    public String saveText(){
+    public String saveText(int w){
         String out = "";
         int k = 0;
         for(Polygon p:polygon){
             out+="P"+k;
-            out+=" x: ";
             for(int i = 0; i < p.xpoints.length; i++){
-                out += p.xpoints[i] + " ";
-            }
-            out+="y: ";
-            for(int i = 0; i < p.ypoints.length; i++){
-                out += p.ypoints[i] + " ";
+                out+=" [";
+                out += p.xpoints[i] + ",";
+                out += p.ypoints[i] + ",";
+                out += w+"]";
             }
             out+="\n";
             k++;

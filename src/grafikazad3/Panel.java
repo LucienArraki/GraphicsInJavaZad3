@@ -53,7 +53,6 @@ public class Panel extends javax.swing.JFrame {
         imagePanel1 = new grafikazad3.ImagePanel();
         SaveImage = new javax.swing.JButton();
         SaveText = new javax.swing.JButton();
-        turnPoint = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("BasePanel");
@@ -61,8 +60,8 @@ public class Panel extends javax.swing.JFrame {
         setType(java.awt.Window.Type.UTILITY);
 
         Open.setText("Wczytaj");
-        Open.setMaximumSize(new java.awt.Dimension(150, 23));
-        Open.setMinimumSize(new java.awt.Dimension(150, 23));
+        Open.setMaximumSize(new java.awt.Dimension(200, 23));
+        Open.setMinimumSize(new java.awt.Dimension(0, 23));
         Open.setPreferredSize(new java.awt.Dimension(150, 23));
         Open.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -71,8 +70,8 @@ public class Panel extends javax.swing.JFrame {
         });
 
         Paint.setText("Rysuj");
-        Paint.setMaximumSize(new java.awt.Dimension(150, 23));
-        Paint.setMinimumSize(new java.awt.Dimension(150, 23));
+        Paint.setMaximumSize(new java.awt.Dimension(200, 23));
+        Paint.setMinimumSize(new java.awt.Dimension(0, 23));
         Paint.setPreferredSize(new java.awt.Dimension(150, 23));
         Paint.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -81,8 +80,8 @@ public class Panel extends javax.swing.JFrame {
         });
 
         Matrix.setText("Macierz transformacji");
-        Matrix.setMaximumSize(new java.awt.Dimension(150, 23));
-        Matrix.setMinimumSize(new java.awt.Dimension(150, 23));
+        Matrix.setMaximumSize(new java.awt.Dimension(200, 23));
+        Matrix.setMinimumSize(new java.awt.Dimension(0, 23));
         Matrix.setPreferredSize(new java.awt.Dimension(150, 23));
         Matrix.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -91,6 +90,8 @@ public class Panel extends javax.swing.JFrame {
         });
 
         Scale.setText("Skaluj");
+        Scale.setMaximumSize(new java.awt.Dimension(200, 23));
+        Scale.setMinimumSize(new java.awt.Dimension(0, 23));
         Scale.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ScaleActionPerformed(evt);
@@ -98,6 +99,8 @@ public class Panel extends javax.swing.JFrame {
         });
 
         Turn.setText("Obróć");
+        Turn.setMaximumSize(new java.awt.Dimension(200, 23));
+        Turn.setMinimumSize(new java.awt.Dimension(0, 23));
         Turn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 TurnActionPerformed(evt);
@@ -120,6 +123,8 @@ public class Panel extends javax.swing.JFrame {
         TextXTurn.setEnabled(false);
 
         Slide.setText("Przesuń");
+        Slide.setMaximumSize(new java.awt.Dimension(200, 23));
+        Slide.setMinimumSize(new java.awt.Dimension(0, 23));
         Slide.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 SlideActionPerformed(evt);
@@ -153,6 +158,8 @@ public class Panel extends javax.swing.JFrame {
 
         SaveImage.setText("Zapisz");
         SaveImage.setToolTipText("");
+        SaveImage.setMaximumSize(new java.awt.Dimension(200, 23));
+        SaveImage.setMinimumSize(new java.awt.Dimension(0, 23));
         SaveImage.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 SaveImageActionPerformed(evt);
@@ -160,16 +167,11 @@ public class Panel extends javax.swing.JFrame {
         });
 
         SaveText.setText("Zapisz plik text");
+        SaveText.setMaximumSize(new java.awt.Dimension(200, 23));
+        SaveText.setMinimumSize(new java.awt.Dimension(0, 23));
         SaveText.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 SaveTextActionPerformed(evt);
-            }
-        });
-
-        turnPoint.setText("Punkt");
-        turnPoint.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                turnPointActionPerformed(evt);
             }
         });
 
@@ -187,9 +189,9 @@ public class Panel extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(Paint, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(SaveImage)
+                        .addComponent(SaveImage, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(SaveText)
+                        .addComponent(SaveText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(imagePanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -219,8 +221,7 @@ public class Panel extends javax.swing.JFrame {
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(TextXTurn, javax.swing.GroupLayout.DEFAULT_SIZE, 54, Short.MAX_VALUE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(TurnDegrees, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(turnPoint, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                        .addComponent(TurnDegrees, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                 .addGap(0, 0, Short.MAX_VALUE)))))
                 .addContainerGap())
         );
@@ -232,14 +233,14 @@ public class Panel extends javax.swing.JFrame {
                     .addComponent(Open, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(Paint, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(Matrix, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(SaveImage)
-                    .addComponent(SaveText))
+                    .addComponent(SaveImage, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(SaveText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(imagePanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(Scale)
+                        .addComponent(Scale, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(TextXScale, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -249,15 +250,13 @@ public class Panel extends javax.swing.JFrame {
                             .addComponent(TextYScale, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(ScaleY, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(86, 86, 86)
-                        .addComponent(Turn)
+                        .addComponent(Turn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(TextXTurn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(TurnDegrees, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(turnPoint)
-                        .addGap(63, 63, 63)
-                        .addComponent(Slide)
+                        .addGap(92, 92, 92)
+                        .addComponent(Slide, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(TextXSlide, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -276,7 +275,7 @@ public class Panel extends javax.swing.JFrame {
     private void OpenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_OpenActionPerformed
         // TODO add your handling code here:
         String name = JOptionPane.showInputDialog("wpisz nazwe obrazka");
-        
+
         img = null;
         try {
             img = ImageIO.read(new File(name));
@@ -289,16 +288,91 @@ public class Panel extends javax.swing.JFrame {
 
     private void MatrixActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MatrixActionPerformed
         // TODO add your handling code here:
+        imagePanel1.turnPolygon.setLocation(0, 0);
+        this.repaint();
         String transformationFile = JOptionPane.showInputDialog("wpisz nazwe obrazka");
-        
+
         try {
             Scanner scanner = new Scanner(new File(transformationFile));
-            System.out.print(scanner.nextInt());
+            matrix(scanner);
         } catch (IOException e) {
             e.printStackTrace();
             System.out.println(e);
         }
     }//GEN-LAST:event_MatrixActionPerformed
+
+    private void matrix(Scanner scanner) {
+        String type = scanner.next();
+        int i = 0;
+        int x;
+        int y;
+        while (scanner.hasNext()) {
+            if (type.toString().equals("p")) {
+                x = 1;
+                y = 1;
+                i = 0;
+                System.out.print("\n");
+                while (scanner.hasNextInt()) {
+                    i++;
+                    scanner.nextInt();
+                    if (i == 6) {
+                        x = scanner.nextInt();
+                        y = scanner.nextInt();
+                        System.out.print(x);
+                        System.out.print(y);
+                        i += 2;
+                    }
+                }
+                if (scanner.hasNext()) {
+                    type = scanner.next();
+                }
+                imagePanel1.slidePolygon(x, y);
+            }
+            if (type.toString().equals("s")) {
+                x = 1;
+                y = 1;
+                i = 0;
+                System.out.print("\n");
+                while (scanner.hasNextInt()) {
+                    i++;
+                    if (i == 1) {
+                        x = scanner.nextInt();
+                        System.out.print(x);
+                        i++;
+                    }
+                    scanner.nextInt();
+
+                    if (i == 4) {
+                        y = scanner.nextInt();
+                        System.out.print(y);
+                        i++;
+                    }
+                }
+                if (scanner.hasNext()) {
+                    type = scanner.next();
+                }
+                imagePanel1.scalePolygon(x, y);
+            }
+            if (type.toString().equals("o")) {
+                x = 1;
+                i = 0;
+                System.out.print("\n");
+                while (scanner.hasNextInt()) {
+                    i++;
+                    if (i == 1) {
+                        x = scanner.nextInt();
+                        System.out.print(x);
+                        i++;
+                    }
+                    scanner.nextInt();
+                }
+                if (scanner.hasNext()) {
+                    type = scanner.next();
+                }
+                imagePanel1.turnPolygon(x);
+            }
+        }
+    }
 
     private void PaintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PaintActionPerformed
         // TODO add your handling code here:
@@ -306,7 +380,7 @@ public class Panel extends javax.swing.JFrame {
         try {
             img = ImageIO.read(new File("back.jpg"));
             imagePanel1.setImage(img);
-            
+
         } catch (IOException e) {
             e.printStackTrace();
             System.out.println(e);
@@ -335,12 +409,8 @@ public class Panel extends javax.swing.JFrame {
 
     private void SaveTextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SaveTextActionPerformed
         // TODO add your handling code here:
-        System.out.print(imagePanel1.saveText());
+        System.out.print(imagePanel1.saveText(1));
     }//GEN-LAST:event_SaveTextActionPerformed
-
-    private void turnPointActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_turnPointActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_turnPointActionPerformed
 
     private void imagePanel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_imagePanel1MouseClicked
         // TODO add your handling code here:
@@ -380,10 +450,10 @@ public class Panel extends javax.swing.JFrame {
             }
         });
     }
-    
+
     //My Variables
     protected BufferedImage img;
-    
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Matrix;
     private javax.swing.JButton Open;
@@ -404,6 +474,5 @@ public class Panel extends javax.swing.JFrame {
     private javax.swing.JButton Turn;
     private javax.swing.JTextField TurnDegrees;
     protected grafikazad3.ImagePanel imagePanel1;
-    private javax.swing.JButton turnPoint;
     // End of variables declaration//GEN-END:variables
 }
