@@ -5,6 +5,8 @@
  */
 package grafikazad3;
 
+import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -17,12 +19,13 @@ import javax.swing.JOptionPane;
  * @author stasz
  */
 public class Panel extends javax.swing.JFrame {
-
+    boolean IsVector;
     /**
      * Creates new form Panel
      */
     public Panel() {
         initComponents();
+        paintBack();
     }
 
     /**
@@ -274,11 +277,13 @@ public class Panel extends javax.swing.JFrame {
 
     private void OpenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_OpenActionPerformed
         // TODO add your handling code here:
+        IsVector = false;
         String name = JOptionPane.showInputDialog("wpisz nazwe obrazka");
 
         img = null;
         try {
             img = ImageIO.read(new File(name));
+            Graphics g = null;
             imagePanel1.setImage(img);
         } catch (IOException e) {
             e.printStackTrace();
@@ -294,7 +299,9 @@ public class Panel extends javax.swing.JFrame {
 
         try {
             Scanner scanner = new Scanner(new File(transformationFile));
-            matrix(scanner);
+            if(IsVector == true)
+                matrix(scanner);
+            //Here method for raster Image (form Raster class)
         } catch (IOException e) {
             e.printStackTrace();
             System.out.println(e);
@@ -318,8 +325,6 @@ public class Panel extends javax.swing.JFrame {
                     if (i == 6) {
                         x = scanner.nextInt();
                         y = scanner.nextInt();
-                        System.out.print(x);
-                        System.out.print(y);
                         i += 2;
                     }
                 }
@@ -337,14 +342,12 @@ public class Panel extends javax.swing.JFrame {
                     i++;
                     if (i == 1) {
                         x = scanner.nextInt();
-                        System.out.print(x);
                         i++;
                     }
                     scanner.nextInt();
 
                     if (i == 4) {
                         y = scanner.nextInt();
-                        System.out.print(y);
                         i++;
                     }
                 }
@@ -361,7 +364,6 @@ public class Panel extends javax.swing.JFrame {
                     i++;
                     if (i == 1) {
                         x = scanner.nextInt();
-                        System.out.print(x);
                         i++;
                     }
                     scanner.nextInt();
@@ -373,9 +375,8 @@ public class Panel extends javax.swing.JFrame {
             }
         }
     }
-
-    private void PaintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PaintActionPerformed
-        // TODO add your handling code here:
+    
+    private void paintBack(){
         img = null;
         try {
             img = ImageIO.read(new File("back.jpg"));
@@ -385,6 +386,12 @@ public class Panel extends javax.swing.JFrame {
             e.printStackTrace();
             System.out.println(e);
         }
+    }
+
+    private void PaintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PaintActionPerformed
+        // TODO add your handling code here:
+        IsVector = true;
+        paintBack();
     }//GEN-LAST:event_PaintActionPerformed
 
     private void ScaleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ScaleActionPerformed

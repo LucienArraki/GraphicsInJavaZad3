@@ -29,6 +29,7 @@ public class ImagePanel extends javax.swing.JPanel {
     ArrayList<Point> point = new ArrayList<Point>();
     private Point startPolygon = new Point(0,0);
     public Point turnPolygon = new Point(0,0);
+    
     /**
      * Creates new form ImagePanel
      */
