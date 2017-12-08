@@ -57,7 +57,7 @@
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="1" attributes="0">
-                                  <Component id="SlideY" max="32767" attributes="0"/>
+                                  <Component id="SlideY" pref="61" max="32767" attributes="0"/>
                                   <Component id="SlideX" min="-2" pref="60" max="-2" attributes="0"/>
                               </Group>
                           </Group>

@@ -209,7 +209,7 @@ public class Panel extends javax.swing.JFrame {
                                     .addComponent(TextYSlide))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(SlideY)
+                                    .addComponent(SlideY, javax.swing.GroupLayout.DEFAULT_SIZE, 61, Short.MAX_VALUE)
                                     .addComponent(SlideX, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -295,7 +295,7 @@ public class Panel extends javax.swing.JFrame {
         // TODO add your handling code here:
         imagePanel1.turnPolygon.setLocation(0, 0);
         this.repaint();
-        String transformationFile = JOptionPane.showInputDialog("wpisz nazwe obrazka");
+        String transformationFile = JOptionPane.showInputDialog("wpisz nazwe pliku z macierza");
 
         try {
             Scanner scanner = new Scanner(new File(transformationFile));

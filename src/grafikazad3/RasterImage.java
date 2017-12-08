@@ -5,15 +5,17 @@
  */
 package grafikazad3;
 
+import java.awt.image.BufferedImage;
 import java.util.Scanner;
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author stasz
  */
 public class RasterImage {
-    
-        private void matrix(Scanner scanner) {
+
+    /*private void matrix(Scanner scanner) {
         String type = scanner.next();
         int i = 0;
         double x[][] = new double[3][3];
@@ -33,8 +35,6 @@ public class RasterImage {
                 }
             }
             if (type.toString().equals("s")) {
-                x = 1;
-                y = 1;
                 i = 0;
                 System.out.print("\n");
                 while (scanner.hasNextInt()) {
@@ -71,5 +71,10 @@ public class RasterImage {
                 }
             }
         }
+    }*/
+    private void determinantMatrix(BufferedImage img, int scale) {
+        
+        int height = Integer.parseInt(JOptionPane.showInputDialog("Wpisz wysokosc"));
+        int width = Integer.parseInt(JOptionPane.showInputDialog("Wpisz szerokosc"));
     }
 }

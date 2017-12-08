@@ -12,141 +12,160 @@ import java.awt.Image;
 import java.awt.Point;
 import java.awt.Polygon;
 import java.awt.Rectangle;
+import java.awt.RenderingHints;
 import java.awt.Shape;
 import java.awt.image.BufferedImage;
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Scanner;
 import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 
 /**
  *
  * @author stasz
  */
 public class ImagePanel extends javax.swing.JPanel {
+
     protected BufferedImage image;
-    ArrayList<Polygon> polygon = new ArrayList<Polygon>();
-    ArrayList<Point> point = new ArrayList<Point>();
-    private Point startPolygon = new Point(0,0);
-    public Point turnPolygon = new Point(0,0);
-    
+    ArrayList<PolygonMatrix> polygon = new ArrayList<PolygonMatrix>();
+    ArrayList<Matrix> point = new ArrayList<Matrix>();
+    private Point startPolygon = new Point(0, 0);
+    public Point turnPolygon = new Point(0, 0);
+
+    private String fileText = "Point.txt";
+
     /**
      * Creates new form ImagePanel
      */
     public ImagePanel() {
         initComponents();
     }
-    
+
     @Override
     public void paintComponent(Graphics g) {    //Wstawienie obrazu i figur
         Graphics2D g2d = (Graphics2D) g;
         g2d.drawImage(image, 0, 0, this);
-        for(Polygon p: polygon){
-            g2d.drawPolygon(p);
+        for (PolygonMatrix p : polygon) {
+            g2d.drawPolygon(p.toPolygon());
         }
-        g2d.drawOval((int)startPolygon.getX(), (int)startPolygon.getY(), 2, 2);
-        g2d.drawOval((int)turnPolygon.getX(), (int)turnPolygon.getY(), 3, 3);
+        g2d.drawOval((int) startPolygon.getX(), (int) startPolygon.getY(), 2, 2);
+        g2d.drawOval((int) turnPolygon.getX(), (int) turnPolygon.getY(), 3, 3);
     }
-    
-    public void setImage(BufferedImage img){
-        this.image=img;
+
+    public void setImage(BufferedImage img) {
+        this.image = img;
         this.repaint();
     }
-    
-    public void turnPolygon(int x){
-        if(polygon.size()>0){
-            slidePolygon(-(int)turnPolygon.getX(),-(int)turnPolygon.getY());
-            ArrayList<Polygon> initP = new ArrayList<Polygon>();
-            for(Polygon p:polygon){
-                int xpoints[] = new int[p.xpoints.length];
-                int ypoints[] = new int[p.ypoints.length];
-                for(int i = 0; i < p.xpoints.length; i++){
-                    xpoints[i] =(int)( (double)p.xpoints[i]*Math.cos(x*Math.PI/180) -
-                            (double)p.ypoints[i]*Math.sin(x*Math.PI/180));
-                    ypoints[i] =(int)( (double)p.xpoints[i]*Math.sin(x*Math.PI/180) +
-                            (double)p.ypoints[i]*Math.cos(x*Math.PI/180));
+
+    public void turnPolygon(double x) {
+        if (polygon.size() > 0) {
+            slidePolygon(-(int) turnPolygon.getX(), -(int) turnPolygon.getY());
+            ArrayList<PolygonMatrix> initP = new ArrayList<PolygonMatrix>();
+            for (PolygonMatrix p : polygon) {
+                double xpoints[] = new double[p.xpoints.length];
+                double ypoints[] = new double[p.ypoints.length];
+                for (int i = 0; i < p.xpoints.length; i++) {
+                    xpoints[i] = ((double) p.xpoints[i] * Math.cos(x * Math.PI / 180)
+                            - (double) p.ypoints[i] * Math.sin(x * Math.PI / 180));
+                    ypoints[i] = ((double) p.xpoints[i] * Math.sin(x * Math.PI / 180)
+                            + (double) p.ypoints[i] * Math.cos(x * Math.PI / 180));
                 }
-                Polygon poly = new Polygon(xpoints, ypoints,p.xpoints.length);
+                PolygonMatrix poly = new PolygonMatrix(xpoints, ypoints, p.xpoints.length);
                 initP.add(poly);
             }
-        polygon = initP;
-        slidePolygon((int)turnPolygon.getX(),(int)turnPolygon.getY());
+            polygon = initP;
+            slidePolygon(turnPolygon.getX(), turnPolygon.getY());
         }
         this.repaint();
     }
-    
-    public void scalePolygon(int x,int y){
-        if(polygon.size()>0){
-            slidePolygon(-(int)turnPolygon.getX(),-(int)turnPolygon.getY());
-            ArrayList<Polygon> initP = new ArrayList<Polygon>();
-            for(Polygon p:polygon){
-                int xpoints[] = new int[p.xpoints.length];
-                int ypoints[] = new int[p.ypoints.length];
-                for(int i = 0; i < p.xpoints.length; i++){
-                    if(x >= 0)
-                        xpoints[i] = p.xpoints[i]*x;
-                    else
-                        xpoints[i] = p.xpoints[i]/Math.abs(x);
-                    if(y >= 0)
-                        ypoints[i] = p.ypoints[i]*y;
-                    else
-                        ypoints[i] = p.ypoints[i]/Math.abs(y);
+
+    public void scalePolygon(double x, double y) {
+        if (polygon.size() > 0) {
+            slidePolygon(-(int) turnPolygon.getX(), -(int) turnPolygon.getY());
+            ArrayList<PolygonMatrix> initP = new ArrayList<PolygonMatrix>();
+            for (PolygonMatrix p : polygon) {
+                double xpoints[] = new double[p.xpoints.length];
+                double ypoints[] = new double[p.ypoints.length];
+                for (int i = 0; i < p.xpoints.length; i++) {
+                    if (x >= 0) {
+                        xpoints[i] = p.xpoints[i] * x;
+                    } else {
+                        xpoints[i] = p.xpoints[i] / Math.abs(x);
+                    }
+                    if (y >= 0) {
+                        ypoints[i] = p.ypoints[i] * y;
+                    } else {
+                        ypoints[i] = p.ypoints[i] / Math.abs(y);
+                    }
                 }
-                Polygon poly = new Polygon(xpoints, ypoints,p.xpoints.length);
+                PolygonMatrix poly = new PolygonMatrix(xpoints, ypoints, p.xpoints.length);
                 initP.add(poly);
             }
-        polygon = initP;
-        slidePolygon((int)turnPolygon.getX(),(int)turnPolygon.getY());
+            polygon = initP;
+            slidePolygon(turnPolygon.getX(), turnPolygon.getY());
         }
         this.repaint();
     }
-        
-    public void slidePolygon(int x,int y){
-        if(polygon.size()>0){
-            ArrayList<Polygon> initP = new ArrayList<Polygon>();
-            for(Polygon p:polygon){
-                int xpoints[] = new int[p.xpoints.length];
-                int ypoints[] = new int[p.ypoints.length];
-                for(int i = 0; i < p.xpoints.length; i++){
-                    xpoints[i] = p.xpoints[i]+x;
-                    ypoints[i] = p.ypoints[i]+y;
+
+    public void slidePolygon(double x, double y) {
+        if (polygon.size() > 0) {
+            ArrayList<PolygonMatrix> initP = new ArrayList<PolygonMatrix>();
+            for (PolygonMatrix p : polygon) {
+                double xpoints[] = new double[p.xpoints.length];
+                double ypoints[] = new double[p.ypoints.length];
+                for (int i = 0; i < p.xpoints.length; i++) {
+                    xpoints[i] = p.xpoints[i] + x;
+                    ypoints[i] = p.ypoints[i] + y;
                 }
-                Polygon poly = new Polygon(xpoints, ypoints,p.xpoints.length);
+                PolygonMatrix poly = new PolygonMatrix(xpoints, ypoints, p.xpoints.length);
                 initP.add(poly);
             }
-        polygon = initP;
+            polygon = initP;
         }
         this.repaint();
     }
-    
-    public String saveText(int w){
+
+    public String saveText(int w) {
         String out = "";
         int k = 0;
-        for(Polygon p:polygon){
-            out+="P"+k;
-            for(int i = 0; i < p.xpoints.length; i++){
-                out+=" [";
-                out += p.xpoints[i] + ",";
-                out += p.ypoints[i] + ",";
-                out += w+"]";
+        try {
+            PrintWriter zapis = new PrintWriter(fileText);
+            for (PolygonMatrix p : polygon) {
+                out += "P";
+                for (int i = 0; i < p.xpoints.length; i++) {
+                    out += " [ ";
+                    out += p.xpoints[i] + " , ";
+                    out += p.ypoints[i] + " , ";
+                    out += w + " ]";
+                }
+                out += "\n";
+                k++;
             }
-            out+="\n";
-            k++;
+            zapis.println(out);
+            zapis.close();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
+
         return out;
     }
-        
+
     protected void takePicture() {
-    BufferedImage img = new BufferedImage(this.getWidth(), this.getHeight(), BufferedImage.TYPE_INT_RGB);
-    this.print(img.getGraphics()); // or: panel.printAll(...);
-    try {
-        ImageIO.write(img, "jpg", new File("panel.jpg"));
+        BufferedImage img = new BufferedImage(this.getWidth(), this.getHeight(), BufferedImage.TYPE_INT_RGB);
+        this.print(img.getGraphics()); // or: panel.printAll(...);
+        try {
+            ImageIO.write(img, "jpg", new File("panel.jpg"));
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
     }
-    catch (IOException e) {
-        // TODO Auto-generated catch block
-        e.printStackTrace();
-    }
-}
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -183,29 +202,28 @@ public class ImagePanel extends javax.swing.JPanel {
 
     private void formMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseClicked
         // TODO add your handling code here:
-        if(point.size()>1){
-            if((int)Math.sqrt(Math.pow(evt.getX()-point.get(point.size()-1).getX(),2) +
-                    Math.pow(evt.getY()-point.get(point.size()-1).getY(),2))< 10){
-                int xpoints[] = new int[point.size()];
-                int ypoints[] = new int[point.size()];
-                for(int i = 0; i < point.size(); i++){
-                    xpoints[i] = (int)point.get(i).getX();
-                    ypoints[i] = (int)point.get(i).getY();
+        if (point.size() > 1) {
+            if ((int) Math.sqrt(Math.pow(evt.getX() - point.get(point.size() - 1).getX(), 2)
+                    + Math.pow(evt.getY() - point.get(point.size() - 1).getY(), 2)) < 10) {
+                double xpoints[] = new double[point.size()];
+                double ypoints[] = new double[point.size()];
+                for (int i = 0; i < point.size(); i++) {
+                    xpoints[i] = point.get(i).getX();
+                    ypoints[i] = point.get(i).getY();
                 }
-                Polygon poly = new Polygon(xpoints, ypoints,point.size());
+                PolygonMatrix poly = new PolygonMatrix(xpoints, ypoints, point.size());
                 polygon.add(poly);
                 point.clear();
-                startPolygon = new Point(0,0);
+                startPolygon = new Point(0, 0);
                 this.repaint();
+            } else {
+                point.add(new Matrix(evt.getX(), evt.getY()));
             }
-            else{
-                point.add(new Point(evt.getX(), evt.getY()));
-            }
-        }
-        else{
-            point.add(new Point(evt.getX(), evt.getY()));
-            if(point.size()<2)
+        } else {
+            point.add(new Matrix(evt.getX(), evt.getY()));
+            if (point.size() < 2) {
                 startPolygon = new Point(evt.getX(), evt.getY());
+            }
             this.repaint();
         }
     }//GEN-LAST:event_formMouseClicked
