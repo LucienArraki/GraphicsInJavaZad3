@@ -5,6 +5,7 @@
  */
 package grafikazad3;
 
+import Jama.Matrix;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
@@ -19,7 +20,9 @@ import javax.swing.JOptionPane;
  * @author stasz
  */
 public class Panel extends javax.swing.JFrame {
+
     boolean IsVector;
+
     /**
      * Creates new form Panel
      */
@@ -299,8 +302,9 @@ public class Panel extends javax.swing.JFrame {
 
         try {
             Scanner scanner = new Scanner(new File(transformationFile));
-            if(IsVector == true)
-                matrix(scanner);
+            if (IsVector == true) {
+                imagePanel1.matrixChange(imagePanel1.matrixFun(scanner));
+            }
             //Here method for raster Image (form Raster class)
         } catch (IOException e) {
             e.printStackTrace();
@@ -308,75 +312,7 @@ public class Panel extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_MatrixActionPerformed
 
-    private void matrix(Scanner scanner) {
-        String type = scanner.next();
-        int i = 0;
-        int x;
-        int y;
-        while (scanner.hasNext()) {
-            if (type.toString().equals("p")) {
-                x = 1;
-                y = 1;
-                i = 0;
-                System.out.print("\n");
-                while (scanner.hasNextInt()) {
-                    i++;
-                    scanner.nextInt();
-                    if (i == 6) {
-                        x = scanner.nextInt();
-                        y = scanner.nextInt();
-                        i += 2;
-                    }
-                }
-                if (scanner.hasNext()) {
-                    type = scanner.next();
-                }
-                imagePanel1.slidePolygon(x, y);
-            }
-            if (type.toString().equals("s")) {
-                x = 1;
-                y = 1;
-                i = 0;
-                System.out.print("\n");
-                while (scanner.hasNextInt()) {
-                    i++;
-                    if (i == 1) {
-                        x = scanner.nextInt();
-                        i++;
-                    }
-                    scanner.nextInt();
-
-                    if (i == 4) {
-                        y = scanner.nextInt();
-                        i++;
-                    }
-                }
-                if (scanner.hasNext()) {
-                    type = scanner.next();
-                }
-                imagePanel1.scalePolygon(x, y);
-            }
-            if (type.toString().equals("o")) {
-                x = 1;
-                i = 0;
-                System.out.print("\n");
-                while (scanner.hasNextInt()) {
-                    i++;
-                    if (i == 1) {
-                        x = scanner.nextInt();
-                        i++;
-                    }
-                    scanner.nextInt();
-                }
-                if (scanner.hasNext()) {
-                    type = scanner.next();
-                }
-                imagePanel1.turnPolygon(x);
-            }
-        }
-    }
-    
-    private void paintBack(){
+    private void paintBack() {
         img = null;
         try {
             img = ImageIO.read(new File("back.jpg"));

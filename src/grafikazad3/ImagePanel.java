@@ -5,6 +5,7 @@
  */
 package grafikazad3;
 
+import Jama.Matrix;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -33,7 +34,7 @@ public class ImagePanel extends javax.swing.JPanel {
 
     protected BufferedImage image;
     ArrayList<PolygonMatrix> polygon = new ArrayList<PolygonMatrix>();
-    ArrayList<Matrix> point = new ArrayList<Matrix>();
+    ArrayList<MatrixPoint> point = new ArrayList<MatrixPoint>();
     private Point startPolygon = new Point(0, 0);
     public Point turnPolygon = new Point(0, 0);
 
@@ -165,6 +166,88 @@ public class ImagePanel extends javax.swing.JPanel {
             e.printStackTrace();
         }
     }
+    
+    protected void matrixChange(Matrix m){
+        for(PolygonMatrix poly:polygon){
+            poly.changeMatrixPoint(m.copy());
+        }
+        this.repaint();
+    }
+
+    protected Matrix matrixFun(Scanner scanner) {
+        String type = scanner.next();
+        int i = 0;
+        int j = 0;
+        double[][] array = {{1.0, 0.0, 0.0}, {0.0, 1.0, 0.0}, {0.0, 0.0, 1.0}};
+        Matrix matrix = new Matrix(array);
+        while (scanner.hasNext()) {
+            if (type.toString().equals("p")) {
+                i = 0;
+                j = 0;
+                double[][] arrays = new double[3][3];
+                while (scanner.hasNextDouble()) {
+                    arrays[i][j] = scanner.nextDouble();
+                    j++;
+                    if (j > 2) {
+                        i++;
+                        j = 0;
+                    }
+                }
+                if (scanner.hasNext()) {
+                    type = scanner.next();
+                }
+                matrix = matrix.times(new Matrix(arrays));
+            }
+            if (type.toString().equals("s")) {
+                i = 0;
+                j = 0;
+                double[][] arrays = new double[3][3];
+                while (scanner.hasNextDouble()) {
+                    arrays[i][j] = scanner.nextDouble();
+                    System.out.print(arrays[i][j]);
+                    j++;
+                    if (j > 2) {
+                        i++;
+                        j = 0;
+                    }
+                }
+                if (scanner.hasNext()) {
+                    type = scanner.next();
+                }
+                matrix = matrix.times(new Matrix(arrays));
+            }
+            if (type.toString().equals("o")) {
+                i = 0;
+                j = 0;
+                double[][] arrays = new double[3][3];
+                while (scanner.hasNextDouble()) {
+                    if (i == 0 && j == 0) {
+                        arrays[i][j] = Math.cos(scanner.nextDouble());
+                    }else
+                    if (i == 0 && j == 1) {
+                        arrays[i][j] = Math.sin(scanner.nextDouble());
+                    }else
+                    if (i == 1 && j == 0) {
+                        arrays[i][j] = -Math.sin(scanner.nextDouble());
+                    }else
+                    if (i == 1 && j == 1) {
+                        arrays[i][j] = Math.cos(scanner.nextDouble());
+                    }else
+                        arrays[i][j]=scanner.nextDouble();
+                    j++;
+                    if (j > 2) {
+                        i++;
+                        j = 0;
+                    }
+                }
+                if (scanner.hasNext()) {
+                    type = scanner.next();
+                }
+                matrix = matrix.times(new Matrix(arrays));
+            }
+        }
+        return matrix;
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -202,6 +285,7 @@ public class ImagePanel extends javax.swing.JPanel {
 
     private void formMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseClicked
         // TODO add your handling code here:
+        System.out.println("x " + evt.getX() + "y " + evt.getY());
         if (point.size() > 1) {
             if ((int) Math.sqrt(Math.pow(evt.getX() - point.get(point.size() - 1).getX(), 2)
                     + Math.pow(evt.getY() - point.get(point.size() - 1).getY(), 2)) < 10) {
@@ -217,10 +301,10 @@ public class ImagePanel extends javax.swing.JPanel {
                 startPolygon = new Point(0, 0);
                 this.repaint();
             } else {
-                point.add(new Matrix(evt.getX(), evt.getY()));
+                point.add(new MatrixPoint(evt.getX(), evt.getY()));
             }
         } else {
-            point.add(new Matrix(evt.getX(), evt.getY()));
+            point.add(new MatrixPoint(evt.getX(), evt.getY()));
             if (point.size() < 2) {
                 startPolygon = new Point(evt.getX(), evt.getY());
             }

@@ -5,6 +5,7 @@
  */
 package grafikazad3;
 
+import Jama.Matrix;
 import java.awt.Polygon;
 import java.util.ArrayList;
 
@@ -14,7 +15,7 @@ import java.util.ArrayList;
  */
 public class PolygonMatrix {
 
-    ArrayList<Polygon> polygon = new ArrayList<Polygon>();
+    ArrayList<MatrixPoint> matrixPoint = new ArrayList<MatrixPoint>();
 
     double xpoints[];
     double ypoints[];
@@ -27,10 +28,22 @@ public class PolygonMatrix {
         this.xpoints = xpoints;
         this.ypoints = ypoints;
         this.npoints = npoints;
+        matrixPoint.clear();
+        
+        for(int i = 0; i<npoints; i++){
+            matrixPoint.add(new MatrixPoint(xpoints[i], ypoints[i]));
+        }
     }
 
     public int size() {
         return npoints;
+    }
+    
+    public void matrixPointToPolygon(){
+        for(int i = 0; i < matrixPoint.size(); i++){
+            xpoints[i] = matrixPoint.get(i).getX();
+            ypoints[i] = matrixPoint.get(i).getY();
+        }
     }
 
     public Polygon toPolygon() {
@@ -42,5 +55,15 @@ public class PolygonMatrix {
         }
         Polygon polygon = new Polygon(xpointsInt, ypointsInt, npoints);
         return polygon;
+    }
+    
+    public void changeMatrixPoint(Matrix m){
+        m.print(3, 1);
+        for(MatrixPoint mPoint:matrixPoint){
+            System.out.println("--------------------");
+            mPoint.toMatrixPoint(m.times(mPoint.toMatrix()));
+            System.out.println("----");
+        }
+        matrixPointToPolygon();
     }
 }
