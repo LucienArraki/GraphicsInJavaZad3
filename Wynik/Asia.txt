@@ -1,0 +1,10 @@
+Wymiary przed transformacją:
+900 x 603
+
+Wymiary po transformacją:
+603 x 890
+
+Macierz:
+0,00  -1,00 10,00 
+1,00  0,00  -0,00 
+0,00  0,00  1,00  

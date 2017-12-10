@@ -329,7 +329,7 @@
     </Component>
     <Component class="javax.swing.JButton" name="SaveText">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Zapisz plik text"/>
+        <Property name="text" type="java.lang.String" value="Zapisz punkty do text"/>
         <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
           <Dimension value="[200, 23]"/>
         </Property>

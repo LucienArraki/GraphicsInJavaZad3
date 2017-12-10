@@ -195,8 +195,6 @@ public class ImagePanel extends javax.swing.JPanel {
         for (PolygonMatrix poly : polygon) {
             poly.changeMatrixPoint(m.copy());
         }
-        System.out.println("Matrix for point");
-        m.print(3, 2);
         this.repaint();
     }
 
@@ -247,13 +245,13 @@ public class ImagePanel extends javax.swing.JPanel {
                 double[][] arrays = new double[3][3];
                 while (scanner.hasNextDouble()) {
                     if (i == 0 && j == 0) {
-                        arrays[i][j] = Math.cos(scanner.nextDouble());
+                        arrays[i][j] = Math.cos(scanner.nextDouble()* Math.PI / 180);
                     } else if (i == 0 && j == 1) {
-                        arrays[i][j] = Math.sin(scanner.nextDouble());
+                        arrays[i][j] = Math.sin(scanner.nextDouble()* Math.PI / 180);
                     } else if (i == 1 && j == 0) {
-                        arrays[i][j] = -Math.sin(scanner.nextDouble());
+                        arrays[i][j] = -Math.sin(scanner.nextDouble()* Math.PI / 180);
                     } else if (i == 1 && j == 1) {
-                        arrays[i][j] = Math.cos(scanner.nextDouble());
+                        arrays[i][j] = Math.cos(scanner.nextDouble()* Math.PI / 180);
                     } else {
                         arrays[i][j] = scanner.nextDouble();
                     }
@@ -308,7 +306,7 @@ public class ImagePanel extends javax.swing.JPanel {
 
     private void formMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseClicked
         // TODO add your handling code here:
-        System.out.println("x " + evt.getX() + "y " + evt.getY());
+        System.out.println("x: " + evt.getX() + " y: " + evt.getY());
         if (point.size() > 1) {
             if ((int) Math.sqrt(Math.pow(evt.getX() - point.get(point.size() - 1).getX(), 2)
                     + Math.pow(evt.getY() - point.get(point.size() - 1).getY(), 2)) < 10) {

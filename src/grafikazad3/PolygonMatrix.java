@@ -60,9 +60,7 @@ public class PolygonMatrix {
     public void changeMatrixPoint(Matrix m){
         m.print(3, 1);
         for(MatrixPoint mPoint:matrixPoint){
-            System.out.println("--------------------");
             mPoint.toMatrixPoint(m.times(mPoint.toMatrix()));
-            System.out.println("----");
         }
         matrixPointToPolygon();
     }
