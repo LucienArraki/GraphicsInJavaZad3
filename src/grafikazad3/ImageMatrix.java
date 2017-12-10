@@ -80,21 +80,15 @@ public class ImageMatrix {
                 x = point.get(0, 0);
                 y = point.get(1, 0);
                 if (x < 0 || y < 0) {
-                    imageResult.setRGB(i, j, Color.BLACK.getRGB());
-                } else if (x < 1 && y < 1) {
-                    //imageResult.setRGB(i, j, image.getRGB(1, 1));
-                } else if (x < 1) {
-                    //imageResult.setRGB(i, j, image.getRGB(1, (int) y));
-                } else if (y < 1) {
-                    //imageResult.setRGB(i, j, image.getRGB((int) x, 1));
+                    imageResult.setRGB(i, j, Color.WHITE.getRGB());
                 } else {
 
                     try {
                         imageResult.setRGB(i, j, pixelToColor(x, y));
                     } catch (Exception e) {
-                        if (x < image.getWidth() && y < image.getHeight()) {
+                        /*if (x < image.getWidth() && y < image.getHeight()) {
                             pixelToColor(x - 1, y - 1);
-                        }
+                        }*/
                     }
                 }
             }
