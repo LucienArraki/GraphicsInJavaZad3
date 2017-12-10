@@ -12,6 +12,7 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.Scanner;
+import javafx.scene.paint.Color;
 import javax.imageio.ImageIO;
 import javax.swing.JOptionPane;
 
@@ -281,7 +282,7 @@ public class Panel extends javax.swing.JFrame {
     private void OpenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_OpenActionPerformed
         // TODO add your handling code here:
         IsVector = false;
-        String name = JOptionPane.showInputDialog("wpisz nazwe obrazka");
+        String name = JOptionPane.showInputDialog("Wpisz nazwe obrazka");
 
         img = null;
         try {
@@ -298,12 +299,14 @@ public class Panel extends javax.swing.JFrame {
         // TODO add your handling code here:
         imagePanel1.turnPolygon.setLocation(0, 0);
         this.repaint();
-        String transformationFile = JOptionPane.showInputDialog("wpisz nazwe pliku z macierza");
+        String transformationFile = JOptionPane.showInputDialog("Wpisz nazwe pliku z macierza");
 
         try {
             Scanner scanner = new Scanner(new File(transformationFile));
             if (IsVector == true) {
                 imagePanel1.matrixChange(imagePanel1.matrixFun(scanner));
+            }else{
+                new ImageMatrix().imageMatrixSave(img, imagePanel1.matrixFun(scanner));
             }
             //Here method for raster Image (form Raster class)
         } catch (IOException e) {

@@ -23,6 +23,8 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 
@@ -37,6 +39,8 @@ public class ImagePanel extends javax.swing.JPanel {
     ArrayList<MatrixPoint> point = new ArrayList<MatrixPoint>();
     private Point startPolygon = new Point(0, 0);
     public Point turnPolygon = new Point(0, 0);
+    private int imageH;
+    private int imageW;
 
     private String fileText = "Point.txt";
 
@@ -45,12 +49,23 @@ public class ImagePanel extends javax.swing.JPanel {
      */
     public ImagePanel() {
         initComponents();
+        imageW = 0;
+        imageH = 0;
     }
 
     @Override
     public void paintComponent(Graphics g) {    //Wstawienie obrazu i figur
         Graphics2D g2d = (Graphics2D) g;
-        g2d.drawImage(image, 0, 0, this);
+        try {
+            g2d.drawImage(ImageIO.read(new File("back.jpg")), 0, 0, this);
+        } catch (IOException ex) {
+            Logger.getLogger(ImagePanel.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        if (imageW + imageH > 0) {
+            g2d.drawImage(image, 0, 0, imageW, imageH, this);
+        } else {
+            g2d.drawImage(image, 0, 0, this);
+        }
         for (PolygonMatrix p : polygon) {
             g2d.drawPolygon(p.toPolygon());
         }
@@ -59,6 +74,15 @@ public class ImagePanel extends javax.swing.JPanel {
     }
 
     public void setImage(BufferedImage img) {
+        double proportionW = (double)this.getWidth()/(double)img.getWidth();
+        double proportionH = (double)this.getHeight()/(double)img.getHeight();
+        if(imageW > imageH){
+            imageW = (int)(img.getWidth()*proportionW);
+            imageH = (int)(img.getHeight()*proportionW);
+        } else{
+            imageW = (int)(img.getWidth()*proportionH);
+            imageH = (int)(img.getHeight()*proportionH);
+        }
         this.image = img;
         this.repaint();
     }
@@ -166,11 +190,13 @@ public class ImagePanel extends javax.swing.JPanel {
             e.printStackTrace();
         }
     }
-    
-    protected void matrixChange(Matrix m){
-        for(PolygonMatrix poly:polygon){
+
+    protected void matrixChange(Matrix m) {
+        for (PolygonMatrix poly : polygon) {
             poly.changeMatrixPoint(m.copy());
         }
+        System.out.println("Matrix for point");
+        m.print(3, 2);
         this.repaint();
     }
 
@@ -186,7 +212,7 @@ public class ImagePanel extends javax.swing.JPanel {
                 j = 0;
                 double[][] arrays = new double[3][3];
                 while (scanner.hasNextDouble()) {
-                    arrays[i][j] = scanner.nextDouble();
+                    arrays[j][i] = scanner.nextDouble();
                     j++;
                     if (j > 2) {
                         i++;
@@ -204,7 +230,6 @@ public class ImagePanel extends javax.swing.JPanel {
                 double[][] arrays = new double[3][3];
                 while (scanner.hasNextDouble()) {
                     arrays[i][j] = scanner.nextDouble();
-                    System.out.print(arrays[i][j]);
                     j++;
                     if (j > 2) {
                         i++;
@@ -223,17 +248,15 @@ public class ImagePanel extends javax.swing.JPanel {
                 while (scanner.hasNextDouble()) {
                     if (i == 0 && j == 0) {
                         arrays[i][j] = Math.cos(scanner.nextDouble());
-                    }else
-                    if (i == 0 && j == 1) {
+                    } else if (i == 0 && j == 1) {
                         arrays[i][j] = Math.sin(scanner.nextDouble());
-                    }else
-                    if (i == 1 && j == 0) {
+                    } else if (i == 1 && j == 0) {
                         arrays[i][j] = -Math.sin(scanner.nextDouble());
-                    }else
-                    if (i == 1 && j == 1) {
+                    } else if (i == 1 && j == 1) {
                         arrays[i][j] = Math.cos(scanner.nextDouble());
-                    }else
-                        arrays[i][j]=scanner.nextDouble();
+                    } else {
+                        arrays[i][j] = scanner.nextDouble();
+                    }
                     j++;
                     if (j > 2) {
                         i++;

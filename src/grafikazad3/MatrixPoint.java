@@ -55,7 +55,6 @@ public class MatrixPoint {
         m[0][0] = x;
         m[1][0] = y;
         m[2][0] = z;
-        System.out.print("x " + x + "y " + y + "z " + z + "\n");
         return new Matrix(m);
     }
     
@@ -63,6 +62,5 @@ public class MatrixPoint {
         this.x = m.get(0, 0);
         this.y = m.get(1, 0);
         this.z = m.get(2, 0);
-        System.out.print("x " + x + "y " + y + "z " + z + "\n");
     }
 }
