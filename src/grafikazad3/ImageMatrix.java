@@ -25,6 +25,8 @@ public class ImageMatrix {
     protected Matrix matrix;
     private int sizeX;
     private int sizeY;
+    private int sizeHelpX;
+    private int sizeHelpY;
 
     public ImageMatrix() {
     }
@@ -44,22 +46,47 @@ public class ImageMatrix {
         help3.print(3, 2);
         Matrix help4 = m.times(new MatrixPoint(image.getWidth(), image.getHeight()).toMatrix());
         help4.print(3, 2);
-        
-        if(Math.max((int)Math.abs(help1.get(0,0)), (int)Math.abs(help2.get(0,0))) >
-                Math.max((int)Math.abs(help3.get(0,0)), (int)Math.abs(help4.get(0,0))))
-            sizeX = Math.max((int)Math.abs(help1.get(0,0)), (int)Math.abs(help2.get(0,0)));
-        else
-            sizeX = Math.max((int)Math.abs(help3.get(0,0)), (int)Math.abs(help4.get(0,0)));
-        
-        if(Math.max((int)Math.abs(help1.get(1,0)), (int)Math.abs(help2.get(1,0))) >
-                Math.max((int)Math.abs(help3.get(1,0)), (int)Math.abs(help4.get(1,0))))
-            sizeY = Math.max((int)Math.abs(help1.get(1,0)), (int)Math.abs(help2.get(1,0)));
-        else
-            sizeY = Math.max((int)Math.abs(help3.get(1,0)), (int)Math.abs(help4.get(1,0)));
-        
+
+        int xx;
+        int yy;
+
+        if ((int) Math.abs(help2.get(0, 0)) + (int) Math.abs(help3.get(0, 0))
+                > (int) Math.abs(help1.get(0, 0)) + (int) Math.abs(help4.get(0, 0))) {
+            sizeX = (int) Math.abs(help2.get(0, 0)) + (int) Math.abs(help3.get(0, 0));
+            xx = (int) help2.get(0, 0) + (int) help3.get(0, 0);
+        } else {
+            sizeX = (int) Math.abs(help1.get(0, 0)) + (int) Math.abs(help4.get(0, 0));
+            xx = (int) help1.get(0, 0) + (int) help4.get(0, 0);
+        }
+
+        if ((int) Math.abs(help2.get(1, 0)) + (int) Math.abs(help3.get(1, 0))
+                > (int) Math.abs(help1.get(1, 0)) + (int) Math.abs(help4.get(1, 0))) {
+            sizeY = (int) Math.abs(help2.get(1, 0)) + (int) Math.abs(help3.get(1, 0));
+            yy = (int) help2.get(1, 0) + (int) help3.get(1, 0);
+        } else {
+            sizeY = (int) Math.abs(help1.get(1, 0)) + (int) Math.abs(help4.get(1, 0));
+            yy = (int) help1.get(1, 0) + (int) help4.get(1, 0);
+        }
+
         imageResult = new BufferedImage(sizeX, sizeY, BufferedImage.TYPE_INT_RGB);
 
+        //sizeHelpY = (int) Math.abs(sizeY - (int) help3.get(1, 0));
+        if (yy < 0 && xx >= 0) {
+            sizeHelpY = (int) Math.abs(sizeY - (int) Math.abs(help3.get(1, 0)));
+            sizeHelpX = 0;
+        } else if (yy < 0 && xx < 0) {
+            sizeHelpY = (int) Math.abs((int) help4.get(1, 0));
+            sizeHelpX = (int) Math.abs((int) help2.get(0, 0));
+        } else if (yy >= 0 && xx < 0) {
+            sizeHelpY = (int) Math.abs((int) help3.get(1, 0));
+            sizeHelpX = (int) Math.abs((int) help4.get(0, 0));
+        } else if (yy >= 0 && xx >=0) {
+            sizeHelpY = 0;
+            sizeHelpX = (int) Math.abs((int) help3.get(0, 0));
+        }
+
         System.out.println(sizeX + " x " + sizeY);
+        System.out.println(sizeHelpX + " x " + sizeHelpY);
         System.out.println("Matrix before inverse");
         m.print(3, 2);
         this.matrix = (Matrix) m.clone();
@@ -76,11 +103,11 @@ public class ImageMatrix {
         Matrix point;
         for (int i = 0; i < imageResult.getWidth(); i++) {
             for (int j = 0; j < imageResult.getHeight(); j++) {
-                point = (Matrix) matrix.times(new MatrixPoint(i, j).toMatrix()).clone();
+                point = (Matrix) matrix.times(new MatrixPoint(i - sizeHelpX, j - sizeHelpY).toMatrix()).clone();
                 x = point.get(0, 0);
                 y = point.get(1, 0);
                 if (x < 0 || y < 0) {
-                    imageResult.setRGB(i, j, Color.WHITE.getRGB());
+                    imageResult.setRGB(i, j, Color.BLACK.getRGB());
                 } else {
 
                     try {

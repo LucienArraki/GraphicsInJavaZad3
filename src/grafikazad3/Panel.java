@@ -309,7 +309,7 @@ public class Panel extends javax.swing.JFrame {
 
         String name = "";
         try {
-            name = JOptionPane.showInputDialog("Wpisz nazwe pliku z macierza");
+            name = "Matrix.txt";
 
             try {
                 Scanner scanner = new Scanner(new File(name));

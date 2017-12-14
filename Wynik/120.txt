@@ -2,9 +2,9 @@ Wymiary przed transformacją:
 670 x 350
 
 Wymiary po transformacją:
-670 x 350
+637 x 755
 
 Macierz:
--1,00 -0,00 670,00 
--0,00 -1,00 350,00 
+-0,50 -0,87 -0,00 
+0,87  -0,50 0,00  
 0,00  0,00  1,00  
